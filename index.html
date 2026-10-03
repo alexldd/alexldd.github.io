@@ -14,30 +14,43 @@
 /* 1) Le lien de la playlist Spotify (garde bien les guillemets " ") */
 const LIEN_PLAYLIST = "https://open.spotify.com/playlist/2bWX6AMRUgdPIusf0GPxB1";
 
-/* 2) Le petit mot secret (affiché au 7e jour d'affilée).
-      Écris entre les deux accents graves ` `  — tu peux aller à la ligne.
-      ⚠️ N'utilise pas le caractère ` à l'intérieur du message. */
-const MESSAGE_SECRET = `Coucou toi,
-
-Si tu vois ce message, ça veut dire que tu as pris soin de moi pendant 7 jours d'affilée, donc bravo à toi ;)
-
-Je vais te dire un secret : quelqu'un m'a créée juste pour toi.
-Chaque petit détail, la boucle d'oreille, le poster, la musique,
-c'est parce qu'il pense à toi plus souvent qu'il ne le dit.
-Il voulait que chaque fois que tu ouvres ton téléphone,
-il y ait un petit truc qui te fasse sourire.
-
-Bref, prends soin de toi, et de moi aussi 🐾`;
+/* 2) Le petit mot secret (affiché au 7e jour d'affilée), encodé en base64
+      pour qu'il ne soit pas lisible en clair dans le code.
+      Pour le changer : mets MODE_TEST à true, ouvre le panneau 🛠 Test,
+      écris ton nouveau message dans « Encoder un message », copie le
+      résultat et colle-le ici entre les guillemets " ". */
+const MESSAGE_SECRET = "Q291Y291IHRvaSwKClNpIHR1IHZvaXMgY2UgbWVzc2FnZSwgw6dhIHZldXQgZGlyZSBxdWUgdHUgYXMgcHJpcyBzb2luIGRlIG1vaSBwZW5kYW50IDcgam91cnMgZCdhZmZpbMOpZSwgZG9uYyBicmF2byDDoCB0b2kgOykKCkplIHZhaXMgdGUgZGlyZSB1biBzZWNyZXQgOiBxdWVscXUndW4gbSdhIGNyw6nDqWUganVzdGUgcG91ciB0b2kuCkNoYXF1ZSBwZXRpdCBkw6l0YWlsLCBsYSBib3VjbGUgZCdvcmVpbGxlLCBsZSBwb3N0ZXIsIGxhIG11c2lxdWUsCmMnZXN0IHBhcmNlIHF1J2lsIHBlbnNlIMOgIHRvaSBwbHVzIHNvdXZlbnQgcXUnaWwgbmUgbGUgZGl0LgpJbCB2b3VsYWl0IHF1ZSBjaGFxdWUgZm9pcyBxdWUgdHUgb3V2cmVzIHRvbiB0w6lsw6lwaG9uZSwKaWwgeSBhaXQgdW4gcGV0aXQgdHJ1YyBxdWkgdGUgZmFzc2Ugc291cmlyZS4KCkJyZWYsIHByZW5kcyBzb2luIGRlIHRvaSwgZXQgZGUgbW9pIGF1c3NpIPCfkL4=";
 
 /* 3) Mode test : true = un petit panneau 🛠 apparaît pour tester
       (avancer d'un jour, ouvrir la lettre…).
       👉 METS false AVANT D'ENVOYER LE LIEN ! */
-const MODE_TEST = true;
+const MODE_TEST = false;
 
 /* ===================================================================== */
 </script>
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>🐱</text></svg>">
+<meta name="description" content="Bichette, ta petite chatte à câliner 🐾 Nourris-la, joue avec elle, et reviens la voir chaque jour… elle a une surprise pour toi 💌">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alexldd.github.io/">
+<meta property="og:title" content="Bichette 🐾">
+<meta property="og:description" content="Une petite chatte toute douce t'attend 💕 Prends soin d'elle chaque jour… elle a une surprise pour toi 💌">
+<meta property="og:image" content="https://alexldd.github.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Bichette, une petite chatte calico avec une boucle d'oreille">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bichette 🐾">
+<meta name="twitter:description" content="Une petite chatte toute douce t'attend 💕">
+<meta name="twitter:image" content="https://alexldd.github.io/og-image.png">
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bichette">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
@@ -333,6 +346,8 @@ header{display:flex;align-items:center;gap:8px}
 #testPanel{position:fixed;left:6px;top:calc(42% + 40px);z-index:70;background:#fff;border-radius:18px;padding:12px;
   box-shadow:0 10px 30px rgba(0,0,0,.2);width:230px;font-size:.8rem}
 #testPanel b{display:block;margin-bottom:6px;color:#c0392b}
+#testPanel textarea{width:100%;font-family:inherit;font-size:.75rem;border:2px solid var(--lav);border-radius:10px;padding:6px;margin:4px 0;user-select:text;-webkit-user-select:text}
+#testPanel{max-height:80dvh;overflow:auto}
 #testPanel button{display:block;width:100%;margin:5px 0;background:var(--lav);border-radius:10px;padding:7px;font-size:.8rem}
 </style>
 </head>
@@ -958,9 +973,20 @@ function ouvrirLettre() {
   S.lettreVue = true; sauver();
   setTimeout(montrerTexte, 1700);
 }
+function decoderMessage() {
+  try {
+    const bin = atob(MESSAGE_SECRET);
+    return new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
+  } catch (e) { return MESSAGE_SECRET; }
+}
+function encoderMessage(txt) {
+  const bytes = new TextEncoder().encode(txt);
+  let bin = ''; bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin);
+}
 function montrerTexte() {
   $('#envwrap').classList.add('hidden');
-  $('#lettertext').textContent = MESSAGE_SECRET;
+  $('#lettertext').textContent = decoderMessage();
   $('#letter').classList.remove('hidden');
   $('#lettercard').classList.remove('hidden');
   const layer = document.createElement('div'); layer.className = 'heartsfly';
@@ -1032,12 +1058,22 @@ if (MODE_TEST) {
     <button data-t="acc">🎀 Débloquer les accessoires</button>
     <button data-t="bas">📉 Jauges basses (boude)</button>
     <button data-t="fav">⭐ Révéler le plat préféré</button>
-    <button data-t="reset">🔄 Tout recommencer</button>`;
+    <button data-t="reset">🔄 Tout recommencer</button>
+    <b style="color:var(--ink);margin-top:10px">✏️ Encoder un message</b>
+    <textarea id="tMsg" rows="4" placeholder="Écris ton nouveau message ici…"></textarea>
+    <button data-t="encoder">🔒 Encoder et copier</button>
+    <textarea id="tOut" rows="2" readonly placeholder="Le code à coller apparaîtra ici"></textarea>`;
   document.body.append(btn, p);
   const info = () => { $('#tInfo').textContent = `Série : ${S.streak} j · Jours joués : ${S.nbJours} · Préféré : ${PLATS[S.favori].e}`; };
   btn.onclick = () => { p.classList.toggle('hidden'); info(); };
   p.onclick = e => {
     const t = e.target.dataset.t; if (!t) return;
+    if (t === 'encoder') {
+      const out = encoderMessage($('#tMsg').value);
+      $('#tOut').value = out; $('#tOut').select();
+      try { navigator.clipboard.writeText(out); toast('🔒 Code copié ! Colle-le dans MESSAGE_SECRET'); } catch (err) {}
+      return;
+    }
     p.classList.add('hidden');
     if (t === 'jour') {
       S.decalage += 86400000;
