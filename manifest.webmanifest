@@ -1,14 +1,14 @@
 {
   "name": "Bichette 🐾",
   "short_name": "Bichette",
-  "description": "Ta petite chatte toute douce à câliner chaque jour.",
+  "description": "Ta chatte de poche.",
   "lang": "fr",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff0f5",
-  "theme_color": "#ffe3ec",
+  "background_color": "#f4ede6",
+  "theme_color": "#f4ede6",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
