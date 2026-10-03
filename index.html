@@ -624,7 +624,7 @@ function etatNeuf() {
     coat:null, stats:{faim:85, bonheur:85, energie:85, proprete:85},
     last:Date.now(), sleeping:false,
     favori:Math.floor(Math.random()*PLATS.length), favoriTrouve:false,
-    streak:0, dernierJour:null, nbJours:0, lettreVue:false,
+    streak:0, dernierJour:null, nbJours:0, lettreVue:false, lettreGagnee:false, testUtilise:false,
     acc:[], equip:[], decalage:0
   };
 }
@@ -638,7 +638,11 @@ function charger() {
 function sauver() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 
 let S = charger();
-if (!MODE_TEST && S.decalage) { S.decalage = 0; if (S.last > Date.now()) S.last = Date.now(); }
+/* hors mode test : on efface toute trace des essais faits en mode test */
+if (!MODE_TEST && (S.decalage || S.testUtilise)) {
+  const coat = S.coat;
+  S = etatNeuf(); S.coat = coat; S.last = Date.now();
+}
 const maintenant = () => Date.now() + (MODE_TEST ? S.decalage : 0);
 
 /* états temporaires (non sauvegardés) */
@@ -720,7 +724,10 @@ function verifierJour() {
     }
   });
   sauver();
-  if (S.streak >= 7 && !S.lettreVue) setTimeout(montrerEnveloppe, 1800);
+  if (S.streak >= 7) {
+    S.lettreGagnee = true; sauver();
+    if (!S.lettreVue) setTimeout(montrerEnveloppe, 1800);
+  }
 }
 
 function tick() {
@@ -760,7 +767,7 @@ function rendu() {
   if (m === 'content' && s.proprete < 35) st = 'Bichette aurait besoin d\'un bain 🛁';
   $('#status').textContent = st;
   $('#streak').textContent = `🔥 ${S.streak} jour${S.streak > 1 ? 's' : ''}`;
-  $('#letterBtn').classList.toggle('hidden', !S.lettreVue);
+  $('#letterBtn').classList.toggle('hidden', !(S.lettreVue && S.lettreGagnee));
   $('#playlistBtn').classList.toggle('hidden', !T.music);
   const bd = $('#btnDormir');
   bd.querySelector('b').textContent = S.sleeping ? '☀️' : '🌙';
@@ -1075,6 +1082,7 @@ if (MODE_TEST) {
       return;
     }
     p.classList.add('hidden');
+    S.testUtilise = true;
     if (t === 'jour') {
       S.decalage += 86400000;
       const s = S.stats; const keep = {...s};
@@ -1082,7 +1090,7 @@ if (MODE_TEST) {
       Object.assign(S.stats, keep); /* on garde les jauges pour ne pas tout vider à chaque clic */
       toast(`⏩ Jour suivant ! Série : ${S.streak} jour(s)`);
     }
-    if (t === 'lettre') { S.lettreVue = false; montrerEnveloppe(); }
+    if (t === 'lettre') { S.lettreVue = false; S.lettreGagnee = true; montrerEnveloppe(); }
     if (t === 'acc') { ACCS.forEach(a => { if (!S.acc.includes(a.id)) S.acc.push(a.id); if (!S.equip.includes(a.id)) S.equip.push(a.id); }); toast('🎀 Accessoires débloqués'); }
     if (t === 'bas') { Object.assign(S.stats, {faim:10, bonheur:15, energie:20, proprete:20}); }
     if (t === 'fav') { toast(`Le plat préféré est : ${PLATS[S.favori].e} ${PLATS[S.favori].nom}`); }
