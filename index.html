@@ -7,38 +7,24 @@
 <title>Bichette 🐾</title>
 
 <script>
-/* =====================================================================
-   ✏️  RÉGLAGES — C'EST ICI QUE TU MODIFIES LE JEU
-   ===================================================================== */
+/* Reglages (lignes 10 a 27) */
 
-/* 1) Le lien de la playlist Spotify (garde bien les guillemets " ") */
+/* playlist Spotify  */
 const LIEN_PLAYLIST = "https://open.spotify.com/playlist/2bWX6AMRUgdPIusf0GPxB1";
 
-/* 2) Le petit mot secret (affiché au 7e jour d'affilée), encodé en base64
-      pour qu'il ne soit pas lisible en clair dans le code.
-      Pour le changer : mets MODE_TEST à true, ouvre le panneau 🛠 Test,
-      écris ton nouveau message dans « Encoder un message », copie le
-      résultat et colle-le ici entre les guillemets " ". */
-const MESSAGE_SECRET = "Q291Y291IHRvaSwKClNpIHR1IHZvaXMgY2UgbWVzc2FnZSwgw6dhIHZldXQgZGlyZSBxdWUgdHUgYXMgcHJpcyBzb2luIGRlIG1vaSBwZW5kYW50IDcgam91cnMgZCdhZmZpbMOpZSwgZG9uYyBicmF2byDDoCB0b2kgOykKCkplIHZhaXMgdGUgZGlyZSB1biBzZWNyZXQgOiBxdWVscXUndW4gbSdhIGNyw6nDqWUganVzdGUgcG91ciB0b2kuCkNoYXF1ZSBwZXRpdCBkw6l0YWlsLCBsYSBib3VjbGUgZCdvcmVpbGxlLCBsZSBwb3N0ZXIsIGxhIG11c2lxdWUsCmMnZXN0IHBhcmNlIHF1J2lsIHBlbnNlIMOgIHRvaSBwbHVzIHNvdXZlbnQgcXUnaWwgbmUgbGUgZGl0LgpJbCB2b3VsYWl0IHF1ZSBjaGFxdWUgZm9pcyBxdWUgdHUgb3V2cmVzIHRvbiB0w6lsw6lwaG9uZSwKaWwgeSBhaXQgdW4gcGV0aXQgdHJ1YyBxdWkgdGUgZmFzc2Ugc291cmlyZS4KCkJyZWYsIHByZW5kcyBzb2luIGRlIHRvaSwgZXQgZGUgbW9pIGF1c3NpIPCfkL4=";
+/* message secret */
+const MESSAGE_SECRET = "Q291Y291LAoKU2kgdHUgdm9pcyBjZSBtZXNzYWdlLCBjJ2VzdCBxdWUgw6dhIGZhaXQgZMOpasOgIDcgam91cnMgcXVlIHR1IHByZW5kcyBzb2luIGRlIG1vaSwgYWxvcnMgYnJhdm8gw6AgdG9pIDspCgpKZSBkb2lzIHQnYXZvdWVyIHVuIHBldGl0IHNlY3JldOKApiBRdWVscXUndW4gbSdhIGNyw6nDqWUgc3DDqWNpYWxlbWVudCBwb3VyIHRvaS4gSWwgbmUgc2FpdCBwYXMgdnJhaW1lbnQgY29tbWVudCB0ZSBsZSBkaXJlLCBhbG9ycyBqZSB2YWlzIGxlIGZhaXJlIMOgIHNhIHBsYWNlIDoKClR1IGNvbXB0ZXMgYmVhdWNvdXAgcG91ciBsdWksIHPDu3JlbWVudCBwbHVzIHF1ZSB0dSBuZSBsZSBwZW5zZXMuCkV0IHRvdXMgbGVzIG1vbWVudHMgcXVlIHZvdXMgYXZleiBwYXNzw6lzIGVuc2VtYmxlLCBpbCBsZXMgYSBhZG9yw6lzLgoKQWxvcnMgcHJlbmRzIHNvaW4gZGUgdG9p4oCmIGV0IHByZW5kcyBzb2luIGRlIGx1aSBhdXNzaSDwn5KVCgpCaWNoZXR0ZQ==";
 
-/* 3) Mode test : true = un petit panneau 🛠 apparaît pour tester
-      (avancer d'un jour, ouvrir la lettre…).
-      👉 METS false AVANT D'ENVOYER LE LIEN ! */
+/* Mode test */
 const MODE_TEST = false;
 
-/* 4) Les copines qui viennent voir Bichette (bouton « Copines »).
-      Écris leur prénom entre les guillemets " ".
-      pelage au choix : "roux", "noir", "tigre", "blanc", "calico"
-      (ou "" pour un pelage au hasard).
-      Tu peux en ajouter ou en enlever une ligne : 4 maximum à l'écran
-      en même temps (s'il y en a plus, 4 viennent au hasard). */
+/* les reglages pour les copines */
 const COPINES = [
   { nom: "Margot", pelage: "noir"   },
   { nom: "Beya", pelage: "tigre"  },
   { nom: "Elcin", pelage: "blanc"  },
 ];
 
-/* ===================================================================== */
 </script>
 
 <meta name="description" content="Ta chatte de poche. Nourris-la, joue avec elle, reviens la voir chaque jour : elle te réserve une surprise.">
